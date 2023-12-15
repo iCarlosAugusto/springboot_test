@@ -32,11 +32,11 @@ public class TaskModel implements Serializable {
         this.name = name;
     }
 
-    public String getValue() {
+    public String getDescription() {
         return description;
     }
 
-    public void setValue(String value) {
+    public void setDescription(String value) {
         this.description = value;
     }
 }
