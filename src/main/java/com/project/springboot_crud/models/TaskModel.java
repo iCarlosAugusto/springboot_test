@@ -16,6 +16,8 @@ public class TaskModel implements Serializable {
     private String name;
     private String description;
 
+    private String urlImage;
+
     public UUID getId() {
         return id;
     }
@@ -38,5 +40,9 @@ public class TaskModel implements Serializable {
 
     public void setDescription(String value) {
         this.description = value;
+    }
+
+    public String getImageUrl() {
+        return urlImage;
     }
 }
