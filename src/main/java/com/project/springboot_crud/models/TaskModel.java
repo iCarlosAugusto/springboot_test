@@ -14,9 +14,13 @@ public class TaskModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
+
     private String description;
 
     private String urlImage;
+
+    private int status;
+
 
     public UUID getId() {
         return id;
@@ -38,11 +42,23 @@ public class TaskModel implements Serializable {
         return description;
     }
 
-    public void setDescription(String value) {
-        this.description = value;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getImageUrl() {
+    public String getUrlImage() {
         return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
