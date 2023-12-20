@@ -4,6 +4,7 @@ import com.project.springboot_crud.dtos.TaskRecordDto;
 import com.project.springboot_crud.dtos.UpdateTaskDto;
 import com.project.springboot_crud.models.TaskModel;
 import com.project.springboot_crud.repositories.TaskRepository;
+import com.project.springboot_crud.services.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,26 +23,22 @@ public class TaskController {
     @Autowired
     TaskRepository taskRepository;
 
+    @Autowired
+    TaskService taskService;
+
     @PostMapping("/tasks")
     ResponseEntity<TaskModel> createTask(@RequestBody @Valid TaskRecordDto taskRecordDto) {
-        var taskModel = new TaskModel();
-        BeanUtils.copyProperties(taskRecordDto, taskModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body(taskRepository.save(taskModel));
+        return taskService.create(taskRecordDto);
     }
 
     @GetMapping("/tasks")
     ResponseEntity<List<TaskModel>> listTasks() {
-        return ResponseEntity.status(HttpStatus.OK).body(taskRepository.findAll());
+        return taskService.list();
     }
 
     @DeleteMapping("/tasks/{id}")
     ResponseEntity<Object> deleteTask(@PathVariable(value = "id") UUID id){
-        Optional<TaskModel> task = taskRepository.findById(id);
-        if(task.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Task not found");
-        }
-        taskRepository.delete(task.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Task deleted");
+      return taskService.delete(id);
     }
 
 
@@ -50,13 +47,7 @@ public class TaskController {
             @PathVariable(value = "id") UUID id,
             @RequestBody UpdateTaskDto updateTaskDto
     ) {
-        Optional<TaskModel> task = taskRepository.findById(id);
-        if(task.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Task not found");
-        }
-        var taskUpdated = task.get();
-        taskUpdated.setStatus(updateTaskDto.status());
-        return ResponseEntity.status(HttpStatus.OK).body(taskRepository.save(taskUpdated));
+        return taskService.update(id, updateTaskDto);
     }
 
 }

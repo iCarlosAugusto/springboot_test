@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 public record TaskRecordDto(
         @NotBlank String name,
         @NotBlank String description,
-        @NotBlank String urlImage
+        @NotBlank String urlImage,
+
+        @NotNull Integer status
 
     ) {
 }
