@@ -1,4 +1,4 @@
-package com.project.springboot_crud;
+package com.project.springboot_crud.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
