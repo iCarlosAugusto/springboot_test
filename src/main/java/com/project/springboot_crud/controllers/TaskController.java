@@ -21,9 +21,6 @@ import java.util.UUID;
 public class TaskController {
 
     @Autowired
-    TaskRepository taskRepository;
-
-    @Autowired
     TaskService taskService;
 
     @PostMapping("/tasks")
